@@ -1,10 +1,11 @@
-package com.viktoriiaroi.spacex
+package com.viktoriiaroi.spacex.ui.launch
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.viktoriiaroi.spacex.R
 
 class LaunchFragment : Fragment() {
 
