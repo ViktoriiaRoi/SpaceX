@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         setupNavigation()
     }
 
-    fun setupNavigation() {
+    private fun setupNavigation() {
         val navController = this.findNavController(R.id.nav_host_fragment)
         val navView: BottomNavigationView = findViewById(R.id.bottom_nav_view)
         navView.setupWithNavController(navController)
