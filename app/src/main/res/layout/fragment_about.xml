@@ -1,13 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.about.AboutFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <data>
+
+        <variable
+            name="company"
+            type="com.viktoriiaroi.core.repository.model.Company" />
+
+        <variable
+            name="error"
+            type="java.lang.Throwable" />
+
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/about_title" />
+        android:fillViewport="true">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            tools:context=".ui.about.AboutFragment">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/logo_description"
+                android:src="@drawable/icon_app_svg" />
+
+            <TextView
+                android:id="@+id/logo_tv"
+                style="@style/LogoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    style="@style/SmallText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/company" />
+
+                <TextView
+                    style="@style/SmallText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/version" />
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/error_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/ErrorText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/error_text(error.message)}" />
+
+                <Button
+                    android:id="@+id/try_again_btn"
+                    style="@style/TryAgainButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/try_again" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/success_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.viktoriiaroi.spacex.ui.views.ExpandableCard
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/about_card_between"
+                    android:layout_height="wrap_content"
+                    app:hiddenText="@{company.description}"
+                    app:titleText="Description" />
+
+                <com.viktoriiaroi.spacex.ui.views.ExpandableCard
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/about_card_between"
+                    app:hiddenText="@{company.valuation}"
+                    app:titleText="Valuation" />
+
+                <com.viktoriiaroi.spacex.ui.views.ExpandableCard
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/about_card_between"
+                    android:layout_height="wrap_content"
+                    app:hiddenText="@{company.employees}"
+                    app:titleText="Employees" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/about_card_height"
+                    android:layout_marginBottom="@dimen/about_card_between">
+
+                    <TextView
+                        android:id="@+id/ceo_tv"
+                        style="@style/CardText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/about_card_horizontal"
+                        android:paddingTop="@dimen/about_card_vertical"
+                        android:text="@string/ceo"
+                        android:textColor="@color/gradient_start" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/about_card_height"
+                    android:layout_marginBottom="@dimen/about_card_between">
+
+                    <TextView
+                        android:id="@+id/website_tv"
+                        style="@style/CardText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/about_card_horizontal"
+                        android:paddingTop="@dimen/about_card_vertical"
+                        android:text="@string/website"
+                        android:textColor="@color/gradient_start" />
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</layout>
