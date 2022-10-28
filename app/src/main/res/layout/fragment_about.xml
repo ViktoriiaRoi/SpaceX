@@ -7,7 +7,7 @@
 
         <variable
             name="company"
-            type="com.viktoriiaroi.core.repository.model.Company" />
+            type="com.viktoriiaroi.core.model.Company" />
 
         <variable
             name="error"
