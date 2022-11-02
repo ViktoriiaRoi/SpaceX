@@ -27,14 +27,18 @@ class ExpandableCard(context: Context, private val attrs: AttributeSet) :
         }
     }
 
+    fun setHiddenText(value: String?) {
+        value?.let {
+            binding.hiddenTv.text = it
+        }
+    }
+
     private fun setCustomAttributes() {
         val customAttributes =
             context.obtainStyledAttributes(attrs, R.styleable.ExpandableCard, 0, 0)
 
         try {
             binding.titleTv.text = customAttributes.getString(R.styleable.ExpandableCard_titleText)
-            binding.hiddenTv.text =
-                customAttributes.getString(R.styleable.ExpandableCard_hiddenText)
         } finally {
             customAttributes.recycle()
         }

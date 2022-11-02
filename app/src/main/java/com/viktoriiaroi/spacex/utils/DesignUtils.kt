@@ -5,6 +5,7 @@ import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
+import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.viktoriiaroi.spacex.R

@@ -3,6 +3,7 @@ package com.viktoriiaroi.spacex.ui.about
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -15,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AboutFragment :
-    BaseFragment<FragmentAboutBinding, AboutState, AboutIntent, AboutViewModel>(FragmentAboutBinding::inflate) {
+    BaseFragment<FragmentAboutBinding, AboutState, AboutIntent, AboutViewModel>() {
     override val viewModel: AboutViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,6 +44,9 @@ class AboutFragment :
             }
         }
     }
+
+    override fun inflateBinding(layoutInflater: LayoutInflater) =
+        FragmentAboutBinding.inflate(layoutInflater)
 
     private fun TextView.hyperlinkStyle() {
         text = DesignUtils.underlinedText(text.toString())

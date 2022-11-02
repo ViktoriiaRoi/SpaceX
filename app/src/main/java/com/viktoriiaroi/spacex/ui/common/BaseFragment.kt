@@ -1,4 +1,4 @@
-package com.viktoriiaroi.spacex.ui
+package com.viktoriiaroi.spacex.ui.common
 
 import android.os.Bundle
 import android.util.Log
@@ -8,19 +8,21 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragment<VB : ViewBinding>(
-    private val inflate: (LayoutInflater, ViewGroup?, Boolean) -> VB,
-) : Fragment() {
+abstract class BaseFragment<VB : ViewBinding, STATE : BaseState, INTENT : BaseIntent, VM : BaseViewModel<STATE, INTENT>> :
+    Fragment() {
+
+    abstract val viewModel: VM
+    abstract fun render(state: STATE)
+    abstract fun inflateBinding(layoutInflater: LayoutInflater): VB
 
     companion object {
         private const val LIFECYCLE_TAG = "FragmentLifecycle"
     }
 
+    private val className = this.javaClass.simpleName
     private var _binding: VB? = null
     protected val binding
         get() = _binding!!
-
-    private val className = this.javaClass.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +35,12 @@ abstract class BaseFragment<VB : ViewBinding>(
         savedInstanceState: Bundle?,
     ): View {
         Log.d(LIFECYCLE_TAG, "$className: onCreateView() called")
-        _binding = inflate.invoke(inflater, container, false)
+        _binding = inflateBinding(inflater)
+
+        viewModel.state.observe(viewLifecycleOwner) {
+            render(it)
+        }
+
         return binding.root
     }
 
