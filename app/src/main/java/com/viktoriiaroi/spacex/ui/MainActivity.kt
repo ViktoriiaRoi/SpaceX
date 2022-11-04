@@ -2,24 +2,35 @@ package com.viktoriiaroi.spacex.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.viktoriiaroi.spacex.R
+import com.viktoriiaroi.spacex.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_SpaceX)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setupNavigation()
     }
 
     private fun setupNavigation() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navView: BottomNavigationView = findViewById(R.id.bottom_nav_view)
-        navView.setupWithNavController(navHostFragment.navController)
+        val appBarConfiguration = AppBarConfiguration(setOf(
+            R.id.homeFragment,
+            R.id.launchFragment,
+            R.id.newsFragment,
+            R.id.aboutFragment))
+        binding.bottomNavView.setupWithNavController(navHostFragment.navController)
+        binding.toolbar.setupWithNavController(navHostFragment.navController, appBarConfiguration)
     }
 }

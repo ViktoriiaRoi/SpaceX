@@ -26,4 +26,8 @@ class DatabaseModule {
             DB_NAME
         ).build()
     }
+
+    @Provides
+    @Singleton
+    fun providesCompanyDao(database: SpaceDatabase) = database.getCompanyDao()
 }

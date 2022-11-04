@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="BottomNavigationText">
-        <item name="android:fontFamily">@font/goldman_regular</item>
-        <item name="android:textSize">12sp</item>
+
+    <style name="ToolbarTheme" parent="Theme.SpaceX">
+        <item name="android:textColorPrimary">@color/contentLeading</item>
+        <item name="android:fontFamily">@font/goldman_bold</item>
         <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="TryAgainButton" parent="Theme.SpaceX">
     </style>
 </resources>

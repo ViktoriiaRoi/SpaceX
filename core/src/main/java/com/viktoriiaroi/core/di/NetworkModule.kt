@@ -1,5 +1,6 @@
 package com.viktoriiaroi.core.di
 
+import com.viktoriiaroi.core.network.CompanyService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,5 +20,11 @@ object NetworkModule {
         return Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCompanyService(retrofit: Retrofit): CompanyService {
+        return retrofit.create(CompanyService::class.java)
     }
 }

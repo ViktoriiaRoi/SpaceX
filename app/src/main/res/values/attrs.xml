@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="titleText" format="string" />
+
+    <declare-styleable name="ExpandableCard">
+        <attr name="titleText" />
+        <attr name="hiddenText" format="string" />
+    </declare-styleable>
+
+</resources>

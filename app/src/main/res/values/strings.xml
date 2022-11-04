@@ -4,4 +4,15 @@
     <string name="launch_title">Launches</string>
     <string name="news_title">News</string>
     <string name="about_title">About</string>
+
+    <string name="company">By newsoft</string>
+    <string name="version">Version 1.0</string>
+    <string name="ceo">CEO</string>
+    <string name="website">Website</string>
+
+    <string name="error_text">Error: %s</string>
+    <string name="try_again">Try again</string>
+
+    <string name="logo_description">The logotype of application</string>
+    <string name="card_arrow_description">The arrow to open/close card</string>
 </resources>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="androidx.cardview.widget.CardView">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/about_card_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/title_tv"
+                style="@style/CardText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/about_card_vertical"
+                android:layout_weight="1"
+                tools:text="Description" />
+
+            <ImageView
+                android:id="@+id/icon_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/about_card_height"
+                android:contentDescription="@string/card_arrow_description"
+                android:paddingHorizontal="24dp"
+                android:src="@drawable/arrow_closed" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/hidden_tv"
+            style="@style/NormalText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/about_card_vertical"
+            android:layout_marginEnd="@dimen/about_card_horizontal"
+            android:layout_marginBottom="@dimen/about_card_vertical"
+            android:textColor="@color/contentAccessory"
+            android:visibility="gone"
+            tools:text="Description" />
+
+    </LinearLayout>
+
+</merge>
