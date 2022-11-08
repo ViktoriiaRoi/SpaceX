@@ -30,4 +30,8 @@ class DatabaseModule {
     @Provides
     @Singleton
     fun providesCompanyDao(database: SpaceDatabase) = database.getCompanyDao()
+
+    @Provides
+    @Singleton
+    fun providesNewsDao(database: SpaceDatabase) = database.getNewsDao()
 }
