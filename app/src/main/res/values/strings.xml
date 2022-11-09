@@ -10,6 +10,8 @@
     <string name="ceo">CEO</string>
     <string name="website">Website</string>
 
+    <string name="date_time_text">%1$s at %2$s</string>
+
     <string name="error_text">Error: %s</string>
     <string name="try_again">Try again</string>
 
