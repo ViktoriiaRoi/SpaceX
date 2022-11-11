@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="card_radius">8dp</dimen>
+
     <dimen name="about_card_height">45dp</dimen>
     <dimen name="about_card_horizontal">32dp</dimen>
     <dimen name="about_card_vertical">12dp</dimen>

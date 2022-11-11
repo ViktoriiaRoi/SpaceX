@@ -1,12 +1,9 @@
 package com.viktoriiaroi.spacex.ui.about
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.viktoriiaroi.spacex.databinding.FragmentAboutBinding
@@ -36,8 +33,6 @@ class AboutFragment :
             is AboutState.Loading -> {}
             is AboutState.ResultCompany -> {
                 binding.company = state.company
-                binding.ceoTv.setOnClickListener { navigateToWeb(state.company.seoLink) }
-                binding.websiteTv.setOnClickListener { navigateToWeb(state.company.websiteLink) }
             }
             is AboutState.Error -> {
                 binding.error = state.throwable
@@ -51,12 +46,5 @@ class AboutFragment :
     private fun TextView.hyperlinkStyle() {
         text = DesignUtils.underlinedText(text.toString())
         DesignUtils.gradientTextView(context, this)
-    }
-
-    private fun navigateToWeb(hyperlink: String?) {
-        hyperlink?.let {
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(hyperlink))
-            ContextCompat.startActivity(requireContext(), browserIntent, null)
-        }
     }
 }

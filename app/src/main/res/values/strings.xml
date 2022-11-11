@@ -10,9 +10,12 @@
     <string name="ceo">CEO</string>
     <string name="website">Website</string>
 
+    <string name="date_time_text">%1$s at %2$s</string>
+
     <string name="error_text">Error: %s</string>
     <string name="try_again">Try again</string>
 
     <string name="logo_description">The logotype of application</string>
     <string name="card_arrow_description">The arrow to open/close card</string>
+    <string name="bookmark_description">Save news to bookmarks</string>
 </resources>

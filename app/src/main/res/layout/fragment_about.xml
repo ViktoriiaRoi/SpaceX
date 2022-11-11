@@ -65,10 +65,11 @@
 
             <ProgressBar
                 android:id="@+id/progress_bar"
-                android:layout_width="wrap_content"
+                android:layout_width="64dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:indeterminateDrawable="@drawable/progress_circle"
                 android:visibility="gone" />
 
             <LinearLayout
@@ -103,8 +104,8 @@
 
                 <com.viktoriiaroi.spacex.ui.views.ExpandableCard
                     android:layout_width="match_parent"
-                    android:layout_marginBottom="@dimen/about_card_between"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/about_card_between"
                     app:hiddenText="@{company.description}"
                     app:titleText="Description" />
 
@@ -117,8 +118,8 @@
 
                 <com.viktoriiaroi.spacex.ui.views.ExpandableCard
                     android:layout_width="match_parent"
-                    android:layout_marginBottom="@dimen/about_card_between"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/about_card_between"
                     app:hiddenText="@{company.employees}"
                     app:titleText="Employees" />
 
@@ -133,6 +134,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/about_card_horizontal"
+                        android:navigateToWeb="@{company.seoLink}"
                         android:paddingTop="@dimen/about_card_vertical"
                         android:text="@string/ceo"
                         android:textColor="@color/gradient_start" />
@@ -150,6 +152,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/about_card_horizontal"
+                        android:navigateToWeb="@{company.websiteLink}"
                         android:paddingTop="@dimen/about_card_vertical"
                         android:text="@string/website"
                         android:textColor="@color/gradient_start" />

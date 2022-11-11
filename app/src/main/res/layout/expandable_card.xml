@@ -38,7 +38,8 @@
 
         <TextView
             android:id="@+id/hidden_tv"
-            style="@style/NormalText"
+            style="@style/MainText"
+            android:textAllCaps="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/about_card_vertical"

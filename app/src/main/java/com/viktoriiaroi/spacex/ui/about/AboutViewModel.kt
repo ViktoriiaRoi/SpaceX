@@ -25,16 +25,6 @@ class AboutViewModel @Inject constructor(private val companyRepo: CompanyReposit
 
     private suspend fun loadCompany() {
         mState.postValue(AboutState.Loading)
-        val databaseResult = companyRepo.getCompanyFromDatabase()
-        if (databaseResult.isSuccess) {
-            mState.postValue(databaseResult.reduce())
-        }
-        val networkResult = companyRepo.getCompanyFromNetwork()
-        if (databaseResult.isFailure or networkResult.isSuccess) {
-            mState.postValue(networkResult.reduce())
-        }
-        networkResult.onSuccess {
-            companyRepo.insertCompanyToDatabase(it)
-        }
+        mState.postValue(companyRepo.getCompany().reduce())
     }
 }
