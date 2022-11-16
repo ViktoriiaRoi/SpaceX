@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.viktoriiaroi.spacex.utils.DateUtils" />
+
+        <variable
+            name="launch"
+            type="com.viktoriiaroi.core.model.Launch" />
+
+        <variable
+            name="timeLeft"
+            type="java.lang.Long" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        app:cardBackgroundColor="@color/clickable_card"
+        app:cardCornerRadius="@dimen/card_radius">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/number_tv"
+                style="@style/MainText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{@string/number_text(launch.number)}"
+                android:textColor="@color/contentAccessory"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/name_tv"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="#132" />
+
+            <View
+                android:id="@+id/gradient_view"
+                android:layout_width="16dp"
+                android:layout_height="0dp"
+                android:background="@drawable/gradient"
+                app:layout_constraintBottom_toBottomOf="@id/name_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/name_tv" />
+
+            <TextView
+                android:id="@+id/name_tv"
+                style="@style/TitleText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/goldman_bold"
+                android:text="@{launch.name}"
+                app:layout_constraintEnd_toStartOf="@+id/barrier_vertical"
+                app:layout_constraintStart_toEndOf="@+id/gradient_view"
+                app:layout_constraintTop_toBottomOf="@+id/number_tv"
+                tools:text="Starlink 4-35 v 1.5" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierAllowsGoneWidgets="true"
+                app:barrierDirection="start"
+                app:constraint_referenced_ids="dayLabel,pending_tv,success_tv" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/timer_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="dayValue,dayLabel,hourValue,hourLabel,minuteValue,minuteLabel,secondValue,secondLabel" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/dayValue"
+                style="@style/ClockCard"
+                android:layout_width="@dimen/timer_item_size"
+                android:layout_height="@dimen/timer_item_size"
+                app:layout_constraintEnd_toEndOf="@+id/dayLabel"
+                app:layout_constraintStart_toStartOf="@+id/dayLabel"
+                app:layout_constraintTop_toTopOf="@+id/name_tv">
+
+                <TextView
+                    style="@style/SmallText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@{@string/timer_value(timeLeft  / (1000 * 60 * 60 * 24))}"
+                    tools:text="33" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/dayLabel"
+                style="@style/SmallText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="4dp"
+                android:text="@string/days"
+                android:textColor="@color/contentAccessory"
+                app:layout_constraintEnd_toStartOf="@+id/hourLabel"
+                app:layout_constraintTop_toBottomOf="@+id/dayValue" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/hourValue"
+                style="@style/ClockCard"
+                android:layout_width="@dimen/timer_item_size"
+                android:layout_height="@dimen/timer_item_size"
+                app:layout_constraintEnd_toEndOf="@+id/hourLabel"
+                app:layout_constraintStart_toStartOf="@+id/hourLabel"
+                app:layout_constraintTop_toTopOf="@id/name_tv">
+
+                <TextView
+                    style="@style/SmallText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@{@string/timer_value(timeLeft / (1000 * 60 * 60) % 24)}"
+                    tools:text="07" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/hourLabel"
+                style="@style/SmallText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="4dp"
+                android:text="@string/hours"
+                android:textColor="@color/contentAccessory"
+                app:layout_constraintEnd_toStartOf="@+id/minuteLabel"
+                app:layout_constraintTop_toBottomOf="@+id/hourValue" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/minuteValue"
+                style="@style/ClockCard"
+                android:layout_width="@dimen/timer_item_size"
+                android:layout_height="@dimen/timer_item_size"
+                app:layout_constraintEnd_toEndOf="@+id/minuteLabel"
+                app:layout_constraintStart_toStartOf="@+id/minuteLabel"
+                app:layout_constraintTop_toTopOf="@id/name_tv">
+
+                <TextView
+                    style="@style/SmallText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@{@string/timer_value(timeLeft / (1000 * 60) % 60)}"
+                    tools:text="43" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/minuteLabel"
+                style="@style/SmallText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="4dp"
+                android:text="@string/minutes"
+                android:textColor="@color/contentAccessory"
+                app:layout_constraintEnd_toStartOf="@+id/secondLabel"
+                app:layout_constraintTop_toBottomOf="@+id/minuteValue" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/secondValue"
+                style="@style/ClockCard"
+                android:layout_width="@dimen/timer_item_size"
+                android:layout_height="@dimen/timer_item_size"
+                app:layout_constraintEnd_toEndOf="@id/secondLabel"
+                app:layout_constraintStart_toStartOf="@id/secondLabel"
+                app:layout_constraintTop_toTopOf="@id/name_tv">
+
+                <TextView
+                    style="@style/SmallText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@{@string/timer_value(timeLeft  / 1000 % 60)}"
+                    tools:text="27" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/secondLabel"
+                style="@style/SmallText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@string/seconds"
+                android:textColor="@color/contentAccessory"
+                app:layout_constraintEnd_toEndOf="@+id/number_tv"
+                app:layout_constraintTop_toBottomOf="@+id/secondValue" />
+
+            <TextView
+                android:id="@+id/pending_tv"
+                style="@style/SmallText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:text="@string/pending_launch"
+                android:textColor="@color/contentAccessory"
+                android:visibility="gone"
+                app:drawableRightCompat="@drawable/ic_pending"
+                app:layout_constraintBottom_toBottomOf="@+id/name_tv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/name_tv" />
+
+            <TextView
+                android:id="@+id/success_tv"
+                style="@style/SmallText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:text="@string/success_launch"
+                app:drawableRightCompat="@drawable/ic_success"
+                app:layout_constraintBottom_toBottomOf="@+id/name_tv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/name_tv" />
+
+            <TextView
+                android:id="@+id/details_tv"
+                style="@style/MainText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:text="@{launch.details}"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/name_tv"
+                app:layout_constraintTop_toBottomOf="@+id/name_tv"
+                tools:text="Detailed info" />
+
+            <TextView
+                android:id="@+id/date_tv"
+                style="@style/MainText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:drawablePadding="8dp"
+                android:text="@{DateUtils.INSTANCE.unixToPrecisionDate(launch.date, launch.datePrecision)}"
+                app:drawableStartCompat="@drawable/ic_calendar"
+                app:layout_constraintEnd_toStartOf="@+id/launch_image_card"
+                app:layout_constraintStart_toStartOf="@+id/name_tv"
+                app:layout_constraintTop_toBottomOf="@id/details_tv"
+                tools:text="September 5, 2022" />
+
+            <TextView
+                android:id="@+id/landing_tv"
+                style="@style/MainText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:drawablePadding="8dp"
+                android:joinList="@{launch.landingTypes}"
+                app:drawableStartCompat="@drawable/ic_landing"
+                app:layout_constraintEnd_toEndOf="@+id/date_tv"
+                app:layout_constraintStart_toStartOf="@+id/date_tv"
+                app:layout_constraintTop_toBottomOf="@+id/date_tv"
+                tools:text="Jrti" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierAllowsGoneWidgets="true"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="details_tv,dayLabel,pending_tv,success_tv" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/launch_image_card"
+                style="@style/ImageCard"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/barrier_horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/image_of_launch"
+                    android:loadImage="@{launch.imageUrl}"
+                    android:src="@drawable/default_launch" />
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

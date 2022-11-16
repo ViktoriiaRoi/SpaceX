@@ -4,6 +4,7 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/surface"
     tools:parentTag="androidx.cardview.widget.CardView">
 
     <LinearLayout
@@ -39,12 +40,12 @@
         <TextView
             android:id="@+id/hidden_tv"
             style="@style/MainText"
-            android:textAllCaps="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/about_card_vertical"
             android:layout_marginEnd="@dimen/about_card_horizontal"
             android:layout_marginBottom="@dimen/about_card_vertical"
+            android:textAllCaps="false"
             android:textColor="@color/contentAccessory"
             android:visibility="gone"
             tools:text="Description" />

@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <style name="Theme.SpaceX" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/gradient_start</item>
         <item name="android:colorBackground">@color/background</item>
@@ -11,6 +11,8 @@
         <item name="android:navigationBarColor">@color/surface</item>
 
         <item name="android:fontFamily">@font/goldman_regular</item>
+        <item name="android:textColor">@color/contentSupporting</item>
+        <item name="android:textAllCaps">true</item>
     </style>
 
     <style name="Theme.Splash" parent="Theme.MaterialComponents.Light.NoActionBar">
