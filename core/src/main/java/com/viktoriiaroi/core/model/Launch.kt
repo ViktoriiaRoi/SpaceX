@@ -1,5 +1,6 @@
 package com.viktoriiaroi.core.model
 
+import com.viktoriiaroi.core.database.model.LaunchEntity
 import com.viktoriiaroi.core.network.model.launch.LaunchDTO
 
 data class Launch(
@@ -27,6 +28,18 @@ data class Launch(
             datePrecision = DatePrecision.valueOf(src.datePrecision?.uppercase() ?: "YEAR"),
             imageUrl = src.links?.patch?.small
         )
-    }
 
+        fun fromEntity(src: LaunchEntity) = Launch(
+            id = src.id,
+            name = src.name,
+            upcoming = src.upcoming,
+            success = src.success,
+            number = src.number,
+            details = src.details,
+            landingTypes = src.landingTypes,
+            date = src.date,
+            datePrecision = src.datePrecision,
+            imageUrl = src.imageUrl
+        )
+    }
 }
