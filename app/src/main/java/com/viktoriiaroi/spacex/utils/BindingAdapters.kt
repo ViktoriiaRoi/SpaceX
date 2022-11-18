@@ -26,7 +26,6 @@ class BindingAdapters {
         @BindingAdapter("android:loadImage")
         @JvmStatic
         fun loadImage(imageView: ImageView, path: String?) {
-            if (path == null) return
             imageView.load(path) {
                 placeholder(R.drawable.default_launch)
                 error(R.drawable.default_launch)

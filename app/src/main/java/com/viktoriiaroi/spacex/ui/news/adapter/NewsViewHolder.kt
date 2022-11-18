@@ -12,11 +12,6 @@ class NewsViewHolder(private val binding: ItemNewsBinding) :
 
     fun bind(news: News) {
         binding.news = news
-        news.event_date?.let {
-            val dateTime = DateUtils.timestampToDate(it)
-            binding.date = dateTime.first
-            binding.time = dateTime.second
-        }
         binding.executePendingBindings()
     }
 
