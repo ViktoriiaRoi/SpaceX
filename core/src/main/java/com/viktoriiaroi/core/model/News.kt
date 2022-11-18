@@ -5,7 +5,7 @@ import com.viktoriiaroi.core.database.model.NewsEntity
 data class News(
     val id: Int,
     val title: String,
-    val event_date: Long? = null,
+    val event_date: Int? = null,
     val details: String,
     val articleLink: String? = null,
 ) {

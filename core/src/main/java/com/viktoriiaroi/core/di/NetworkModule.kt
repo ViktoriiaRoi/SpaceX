@@ -1,6 +1,7 @@
 package com.viktoriiaroi.core.di
 
 import com.viktoriiaroi.core.network.CompanyService
+import com.viktoriiaroi.core.network.LaunchService
 import com.viktoriiaroi.core.network.NewsService
 import dagger.Module
 import dagger.Provides
@@ -33,5 +34,11 @@ object NetworkModule {
     @Singleton
     fun provideNewsService(retrofit: Retrofit): NewsService {
         return retrofit.create(NewsService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideLaunchService(retrofit: Retrofit): LaunchService {
+        return retrofit.create(LaunchService::class.java)
     }
 }
