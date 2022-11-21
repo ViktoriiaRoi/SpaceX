@@ -62,4 +62,8 @@ dependencies {
     // Navigation component
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.1'
+
+    // Images
+    implementation "io.coil-kt:coil:2.2.2"
+    implementation "io.coil-kt:coil-svg:2.2.2"
 }

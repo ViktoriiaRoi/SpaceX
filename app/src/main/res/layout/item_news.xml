@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.viktoriiaroi.spacex.utils.DateUtils" />
+
         <variable
             name="news"
             type="com.viktoriiaroi.core.model.News" />
@@ -38,7 +40,7 @@
 
             <View
                 android:id="@+id/gradient_view"
-                android:layout_width="20dp"
+                android:layout_width="16dp"
                 android:layout_height="0dp"
                 android:background="@drawable/gradient"
                 app:layout_constraintBottom_toBottomOf="@id/title_tv"
@@ -62,10 +64,10 @@
             <TextView
                 android:id="@+id/date_tv"
                 style="@style/SmallText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="302dp"
+                android:layout_height="16dp"
                 android:layout_marginTop="8dp"
-                android:text="@{@string/date_time_text(date, time)}"
+                android:text="@{@string/date_time_text(DateUtils.INSTANCE.unixToDate(news.event_date), DateUtils.INSTANCE.unixToTime(news.event_date))}"
                 android:textColor="@color/contentAccessory"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/title_tv"

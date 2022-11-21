@@ -10,4 +10,6 @@
 
     <color name="gradient_start">#0096D6</color>
     <color name="gradient_end">#5BCE8F</color>
+    <color name="translucent_gradient_start">#330096D6</color>
+    <color name="translucent_gradient_end">#335BCE8F</color>
 </resources>

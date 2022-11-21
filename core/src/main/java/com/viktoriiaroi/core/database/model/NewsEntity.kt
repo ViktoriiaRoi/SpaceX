@@ -13,7 +13,7 @@ class NewsEntity(
     @ColumnInfo(name = "title")
     val title: String,
     @ColumnInfo(name = "event_date")
-    val event_date: Long? = null,
+    val event_date: Int? = null,
     @ColumnInfo(name = "details")
     val details: String,
     @ColumnInfo(name = "article_link")

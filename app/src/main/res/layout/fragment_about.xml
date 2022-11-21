@@ -126,7 +126,8 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/about_card_height"
-                    android:layout_marginBottom="@dimen/about_card_between">
+                    android:layout_marginBottom="@dimen/about_card_between"
+                    android:background="@color/surface">
 
                     <TextView
                         android:id="@+id/ceo_tv"
@@ -144,7 +145,8 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/about_card_height"
-                    android:layout_marginBottom="@dimen/about_card_between">
+                    android:layout_marginBottom="@dimen/about_card_between"
+                    android:background="@color/surface">
 
                     <TextView
                         android:id="@+id/website_tv"

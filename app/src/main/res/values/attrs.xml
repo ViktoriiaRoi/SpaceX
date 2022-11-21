@@ -7,4 +7,8 @@
         <attr name="hiddenText" format="string" />
     </declare-styleable>
 
+    <declare-styleable name="LaunchTimer">
+        <attr name="launchDate" format="integer" />
+    </declare-styleable>
+
 </resources>
