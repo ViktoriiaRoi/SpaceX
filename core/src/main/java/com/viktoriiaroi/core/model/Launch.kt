@@ -14,6 +14,7 @@ data class Launch(
     val date: Int? = null,
     val datePrecision: DatePrecision,
     val imageUrl: String? = null,
+    val rocketId: String? = null,
 ) {
     companion object {
         fun fromDTO(src: LaunchDTO) = Launch(
@@ -26,7 +27,8 @@ data class Launch(
             landingTypes = src.cores.mapNotNull { it.landingType },
             date = src.dateUnix,
             datePrecision = DatePrecision.valueOf(src.datePrecision?.uppercase() ?: "YEAR"),
-            imageUrl = src.links?.patch?.small
+            imageUrl = src.links?.patch?.small,
+            rocketId = src.rocket,
         )
 
         fun fromEntity(src: LaunchEntity) = Launch(
