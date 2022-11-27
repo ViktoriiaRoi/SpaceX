@@ -46,7 +46,9 @@ data class Launch(
             date = src.date,
             datePrecision = src.datePrecision,
             imageUrl = src.imageUrl,
-            rocketId = src.rocketId
+            rocketId = src.rocketId,
+            coreId = src.coreId,
+            coreFlight = src.coreFlight
         )
     }
 }

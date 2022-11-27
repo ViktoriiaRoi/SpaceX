@@ -43,4 +43,7 @@ class DatabaseModule {
     @Singleton
     fun providesRocketDao(database: SpaceDatabase) = database.getRocketDao()
 
+    @Provides
+    @Singleton
+    fun providesCoreDao(database: SpaceDatabase) = database.getCoreDao()
 }
