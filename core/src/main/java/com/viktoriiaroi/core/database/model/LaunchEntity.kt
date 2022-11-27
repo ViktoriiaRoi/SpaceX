@@ -32,6 +32,8 @@ class LaunchEntity(
     val datePrecision: DatePrecision,
     @ColumnInfo(name = "image_url")
     val imageUrl: String? = null,
+    @ColumnInfo(name = "rocket_id")
+    val rocketId: String? = null,
 ) {
     companion object {
         fun fromModel(src: Launch) = LaunchEntity(
@@ -44,7 +46,8 @@ class LaunchEntity(
             landingTypes = src.landingTypes,
             date = src.date,
             datePrecision = src.datePrecision,
-            imageUrl = src.imageUrl
+            imageUrl = src.imageUrl,
+            rocketId = src.rocketId
         )
     }
 }

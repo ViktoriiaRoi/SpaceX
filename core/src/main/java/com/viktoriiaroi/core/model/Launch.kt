@@ -45,7 +45,8 @@ data class Launch(
             landingTypes = src.landingTypes,
             date = src.date,
             datePrecision = src.datePrecision,
-            imageUrl = src.imageUrl
+            imageUrl = src.imageUrl,
+            rocketId = src.rocketId
         )
     }
 }
