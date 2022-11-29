@@ -25,5 +25,19 @@
         <item name="cardElevation">0dp</item>
     </style>
 
-    <style name="TryAgainButton" parent="Theme.SpaceX"></style>
+    <style name="DetailsBottomSheet" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/DetailsStyle</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:navigationBarColor">@color/background</item>
+    </style>
+
+    <style name="DetailsStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_bg</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="TryAgainButton" parent="Theme.SpaceX">
+        <item name="android:backgroundTint">@color/gradient_start</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 </resources>

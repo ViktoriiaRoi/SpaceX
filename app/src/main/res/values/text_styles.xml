@@ -13,17 +13,26 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
-    <style name="CardText" parent="BaseText">
-        <item name="android:textSize">@dimen/card_text_size</item>
-    </style>
-
     <style name="TitleText" parent="BaseText">
         <item name="android:fontFamily">@font/goldman_bold</item>
         <item name="android:textSize">@dimen/title_text_size</item>
     </style>
 
+    <style name="CardText" parent="BaseText">
+        <item name="android:textSize">@dimen/card_text_size</item>
+    </style>
+
+    <style name="HeadingText" parent="BaseText">
+        <item name="android:textSize">@dimen/card_text_size</item>
+        <item name="android:fontFamily">@font/goldman_bold</item>
+    </style>
+
     <style name="MainText" parent="BaseText">
         <item name="android:textSize">@dimen/normal_text_size</item>
+    </style>
+
+    <style name="LabelText" parent="MainText">
+        <item name="android:textColor">@color/contentAccessory</item>
     </style>
 
     <style name="SmallText" parent="BaseText">
