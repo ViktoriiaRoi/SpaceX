@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.viktoriiaroi.spacex.R
 import com.viktoriiaroi.spacex.databinding.FragmentLaunchBinding
 import com.viktoriiaroi.spacex.ui.common.BaseFragment
+import com.viktoriiaroi.spacex.ui.details.DetailsFragment
 import com.viktoriiaroi.spacex.ui.launch.adapter.LaunchAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,10 +19,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class LaunchFragment :
     BaseFragment<FragmentLaunchBinding, LaunchState, LaunchIntent, LaunchViewModel>() {
     override val viewModel: LaunchViewModel by viewModels()
-    private val adapter = LaunchAdapter()
+    private val adapter = LaunchAdapter {
+        val action = LaunchFragmentDirections.actionLaunchFragmentToBottomSheet(it)
+        findNavController().navigate(action)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         setupRecycler(binding.launchesRecycler)
         binding.tryAgainBtn.setOnClickListener {
             updateLaunches(binding.toggleButtonGroup.checkedButtonId)

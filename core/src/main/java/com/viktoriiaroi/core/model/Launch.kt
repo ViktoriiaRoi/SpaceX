@@ -1,8 +1,11 @@
 package com.viktoriiaroi.core.model
 
+import android.os.Parcelable
 import com.viktoriiaroi.core.database.model.LaunchEntity
 import com.viktoriiaroi.core.network.model.launch.LaunchDTO
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Launch(
     val id: String,
     val name: String,
@@ -17,7 +20,7 @@ data class Launch(
     val rocketId: String? = null,
     val coreId: String? = null,
     val coreFlight: Int? = null,
-) {
+): Parcelable {
     companion object {
         fun fromDTO(src: LaunchDTO) = Launch(
             id = src.id.orEmpty(),

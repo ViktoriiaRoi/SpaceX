@@ -11,7 +11,7 @@ import com.viktoriiaroi.spacex.databinding.ItemLaunchBinding
 import com.viktoriiaroi.spacex.utils.DateUtils
 import java.util.*
 
-class LaunchViewHolder(private val binding: ItemLaunchBinding) :
+class LaunchViewHolder(private val binding: ItemLaunchBinding, private val onItemClick: (launch: Launch) -> Unit) :
     RecyclerView.ViewHolder(binding.root) {
 
     private var timer: CountDownTimer? = null
@@ -27,6 +27,7 @@ class LaunchViewHolder(private val binding: ItemLaunchBinding) :
                 startTimer(binding, it)
             }
         }
+        binding.root.setOnClickListener { onItemClick(launch) }
         binding.executePendingBindings()
     }
 
@@ -47,10 +48,10 @@ class LaunchViewHolder(private val binding: ItemLaunchBinding) :
     }
 
     companion object {
-        fun from(parent: ViewGroup): LaunchViewHolder {
+        fun from(parent: ViewGroup, onItemClick: (launch: Launch) -> Unit): LaunchViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = ItemLaunchBinding.inflate(layoutInflater, parent, false)
-            return LaunchViewHolder(binding)
+            return LaunchViewHolder(binding, onItemClick)
         }
     }
 }
