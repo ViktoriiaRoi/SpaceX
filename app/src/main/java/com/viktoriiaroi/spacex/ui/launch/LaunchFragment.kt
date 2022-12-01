@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.viktoriiaroi.spacex.R
 import com.viktoriiaroi.spacex.databinding.FragmentLaunchBinding
 import com.viktoriiaroi.spacex.ui.common.BaseFragment
-import com.viktoriiaroi.spacex.ui.details.DetailsFragment
 import com.viktoriiaroi.spacex.ui.launch.adapter.LaunchAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,9 +37,9 @@ class LaunchFragment :
 
     private fun updateLaunches(buttonId: Int) {
         when (buttonId) {
-            R.id.all_btn -> viewModel.handleIntent(LaunchIntent.LoadAllLaunches)
-            R.id.past_btn -> viewModel.handleIntent(LaunchIntent.LoadPastLaunches)
-            R.id.future_btn -> viewModel.handleIntent(LaunchIntent.LoadFutureLaunches)
+            R.id.all_btn -> viewModel.handleIntent(LaunchIntent.LoadLaunches(LaunchType.ALL))
+            R.id.past_btn -> viewModel.handleIntent(LaunchIntent.LoadLaunches(LaunchType.PAST))
+            R.id.future_btn -> viewModel.handleIntent(LaunchIntent.LoadLaunches(LaunchType.FUTURE))
         }
     }
 

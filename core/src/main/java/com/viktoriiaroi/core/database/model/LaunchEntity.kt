@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.viktoriiaroi.core.database.converters.LaunchConverter
 import com.viktoriiaroi.core.model.DatePrecision
-import com.viktoriiaroi.core.model.Launch
+import com.viktoriiaroi.core.network.model.launch.LaunchDTO
 
 @TypeConverters(value = [LaunchConverter::class])
 @Entity(tableName = "launches")
@@ -40,20 +40,20 @@ class LaunchEntity(
     val coreFlight: Int? = null,
 ) {
     companion object {
-        fun fromModel(src: Launch) = LaunchEntity(
-            id = src.id,
-            name = src.name,
-            upcoming = src.upcoming,
-            success = src.success,
-            number = src.number,
-            details = src.details,
-            landingTypes = src.landingTypes,
-            date = src.date,
-            datePrecision = src.datePrecision,
-            imageUrl = src.imageUrl,
-            rocketId = src.rocketId,
-            coreId = src.coreId,
-            coreFlight = src.coreFlight
+        fun fromDTO(src: LaunchDTO) = LaunchEntity(
+            id = src.id.orEmpty(),
+            name = src.name.orEmpty(),
+            upcoming = src.upcoming ?: true,
+            success = src.success ?: false,
+            number = src.flightNumber ?: 0,
+            details = src.details.orEmpty(),
+            landingTypes = src.cores.mapNotNull { it.landingType },
+            date = src.dateUnix,
+            datePrecision = DatePrecision.valueOf(src.datePrecision?.uppercase() ?: "YEAR"),
+            imageUrl = src.links?.patch?.small,
+            rocketId = src.rocket,
+            coreId = src.cores[0].core,
+            coreFlight = src.cores[0].flight
         )
     }
 }
