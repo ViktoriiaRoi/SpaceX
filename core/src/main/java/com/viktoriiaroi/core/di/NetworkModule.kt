@@ -1,8 +1,6 @@
 package com.viktoriiaroi.core.di
 
-import com.viktoriiaroi.core.network.CompanyService
-import com.viktoriiaroi.core.network.LaunchService
-import com.viktoriiaroi.core.network.NewsService
+import com.viktoriiaroi.core.network.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,5 +38,17 @@ object NetworkModule {
     @Singleton
     fun provideLaunchService(retrofit: Retrofit): LaunchService {
         return retrofit.create(LaunchService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRocketService(retrofit: Retrofit): RocketService {
+        return retrofit.create(RocketService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCoreService(retrofit: Retrofit): CoreService {
+        return retrofit.create(CoreService::class.java)
     }
 }

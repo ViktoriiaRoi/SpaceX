@@ -5,59 +5,42 @@ import com.viktoriiaroi.core.database.model.LaunchEntity
 import com.viktoriiaroi.core.model.Launch
 import com.viktoriiaroi.core.network.LaunchService
 import com.viktoriiaroi.core.network.model.launch.LaunchDTO
-import com.viktoriiaroi.core.utils.processNetworkResult
 import com.viktoriiaroi.core.utils.processList
 import com.viktoriiaroi.core.utils.processResponse
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class LaunchRepository @Inject constructor(
     private val launchService: LaunchService,
     private val launchDao: LaunchDao,
 ) {
-    suspend fun getAllLaunches(): Result<List<Launch>> =
-        getAllLaunchesFromNetwork().processNetworkResult(
-            ::insertLaunchesToDatabase,
-            ::getAllLaunchesFromDatabase)
+    val launchFlow =
+        launchDao.getLaunches().map { list -> list.processList { Launch.fromEntity(it) } }
 
-    suspend fun getPastLaunches(): Result<List<Launch>> =
-        getPastLaunchesFromNetwork().processNetworkResult(
-            ::insertLaunchesToDatabase,
-            ::getPastLaunchesFromDatabase)
+    suspend fun updateAllLaunches() {
+        getAllLaunchesFromNetwork().onSuccess { insertLaunchesToDatabase(it) }
+    }
 
-    suspend fun getFutureLaunches(): Result<List<Launch>> =
-        getFutureLaunchesFromNetwork().processNetworkResult(
-            ::insertLaunchesToDatabase,
-            ::getFutureLaunchesFromDatabase)
+    suspend fun updatePastLaunches() {
+        getPastLaunchesFromNetwork().onSuccess { insertLaunchesToDatabase(it) }
+    }
 
-    private fun launchMapper(list: List<LaunchDTO>) = list.map { Launch.fromDTO(it) }
+    suspend fun updateFutureLaunches() {
+        getFutureLaunchesFromNetwork().onSuccess { insertLaunchesToDatabase(it) }
+    }
 
-    private suspend fun getAllLaunchesFromNetwork(): Result<List<Launch>> =
-        processResponse(
-            { launchService.getAllLaunches() },
-            ::launchMapper)
+    private suspend fun getAllLaunchesFromNetwork(): Result<List<LaunchDTO>> =
+        processResponse({ launchService.getAllLaunches() }, { it })
 
-    private suspend fun getPastLaunchesFromNetwork(): Result<List<Launch>> =
-        processResponse(
-            { launchService.getPastLaunches() },
-            ::launchMapper)
+    private suspend fun getPastLaunchesFromNetwork(): Result<List<LaunchDTO>> =
+        processResponse({ launchService.getPastLaunches() }, { it })
 
-    private suspend fun getFutureLaunchesFromNetwork(): Result<List<Launch>> =
-        processResponse(
-            { launchService.getFutureLaunches() },
-            ::launchMapper)
+    private suspend fun getFutureLaunchesFromNetwork(): Result<List<LaunchDTO>> =
+        processResponse({ launchService.getFutureLaunches() }, { it })
 
-    private suspend fun getAllLaunchesFromDatabase(): Result<List<Launch>> =
-        launchDao.getAllLaunches().processList { Launch.fromEntity(it) }
-
-    private suspend fun getPastLaunchesFromDatabase(): Result<List<Launch>> =
-        launchDao.getPastLaunches().processList { Launch.fromEntity(it) }
-
-    private suspend fun getFutureLaunchesFromDatabase(): Result<List<Launch>> =
-        launchDao.getFutureLaunches().processList { Launch.fromEntity(it) }
-
-    private suspend fun insertLaunchesToDatabase(launchList: List<Launch>?) {
+    private suspend fun insertLaunchesToDatabase(launchList: List<LaunchDTO>?) {
         launchList?.let {
-            launchDao.insertLaunches(launchList.map { LaunchEntity.fromModel(it) })
+            launchDao.insertLaunches(launchList.map { LaunchEntity.fromDTO(it) })
         }
     }
 }

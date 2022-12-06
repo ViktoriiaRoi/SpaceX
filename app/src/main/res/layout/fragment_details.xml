@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="launch"
+            type="com.viktoriiaroi.core.model.Launch" />
+
+        <variable
+            name="rocket"
+            type="com.viktoriiaroi.core.model.Rocket" />
+
+        <variable
+            name="core"
+            type="com.viktoriiaroi.core.model.Core" />
+
+        <variable
+            name="error"
+            type="java.lang.Throwable" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="32dp"
+        tools:context="ui.details.DetailsFragment">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="32dp"
+            android:layout_weight="1"
+            android:indeterminateDrawable="@drawable/progress_circle"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/error_tv"
+            style="@style/ErrorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/error_text(error.message)}"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/error_text" />
+
+        <Button
+            android:id="@+id/try_again_btn"
+            style="@style/TryAgainButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/try_again"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/error_tv" />
+
+        <ImageView
+            android:id="@+id/icon_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/close_description"
+            android:padding="8dp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
+            app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="@dimen/card_radius"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/icon_close">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:id="@+id/launch_tv"
+                    style="@style/LabelText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{launch.name}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/name_tv"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Starlink 4-34 (v 1.5)" />
+
+                <View
+                    android:id="@+id/gradient_view"
+                    android:layout_width="16dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/gradient"
+                    app:layout_constraintBottom_toBottomOf="@id/name_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/name_tv" />
+
+                <TextView
+                    android:id="@+id/name_tv"
+                    style="@style/TitleText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:fontFamily="@font/goldman_bold"
+                    android:text="@{rocket.name}"
+                    app:layout_constraintEnd_toStartOf="@+id/core_serial"
+                    app:layout_constraintStart_toEndOf="@+id/gradient_view"
+                    app:layout_constraintTop_toBottomOf="@+id/launch_tv"
+                    tools:text="Falcon 9" />
+
+                <LinearLayout
+                    android:id="@+id/core_serial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/name_tv">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{core.serial}"
+                        android:textSize="@dimen/title_text_size"
+                        app:layout_constraintEnd_toEndOf="@+id/serial_label"
+                        app:layout_constraintStart_toStartOf="@+id/serial_label"
+                        app:layout_constraintTop_toTopOf="@+id/name_tv"
+                        tools:text="B1072" />
+
+                    <TextView
+                        style="@style/SmallText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/details_core"
+                        android:textColor="@color/contentAccessory"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/serial_value" />
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/card_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="163dp" />
+
+                <TextView
+                    android:id="@+id/block_label"
+                    style="@style/LabelText"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:isVisible="@{core.block != null}"
+                    android:text="@string/details_block"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/name_tv" />
+
+                <TextView
+                    style="@style/MainText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isVisible="@{core.block != null}"
+                    android:text="@{core.block.toString()}"
+                    app:layout_constraintStart_toStartOf="@+id/card_guideline"
+                    app:layout_constraintTop_toTopOf="@+id/block_label"
+                    tools:text="5" />
+
+                <TextView
+                    android:id="@+id/reused_label"
+                    app:layout_goneMarginTop="16dp"
+                    style="@style/LabelText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/reused"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/block_label" />
+
+                <TextView
+                    style="@style/MainText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{core.reused ? @string/yes : @string/no}"
+                    app:layout_constraintStart_toStartOf="@+id/card_guideline"
+                    app:layout_constraintTop_toTopOf="@+id/reused_label"
+                    tools:text="No" />
+
+                <TextView
+                    android:id="@+id/flight_label"
+                    style="@style/LabelText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="4dp"
+                    android:isVisible="@{launch.coreFlight != null}"
+                    android:text="@string/details_flight"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/reused_label" />
+
+                <TextView
+                    style="@style/MainText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isVisible="@{launch.coreFlight != null}"
+                    android:text="@{launch.coreFlight.toString()}"
+                    app:layout_constraintStart_toStartOf="@+id/card_guideline"
+                    app:layout_constraintTop_toTopOf="@+id/flight_label"
+                    tools:text="0" />
+
+                <TextView
+                    android:id="@+id/status_tv"
+                    style="@style/SmallText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/goldman_bold"
+                    android:text="@{core.status.toString()}"
+                    android:textColor="@color/contentAccessory"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="Active" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/overview_label"
+            style="@style/HeadingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="40dp"
+            android:isVisible="@{rocket != null}"
+            android:text="@{@string/overview(rocket.name)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            tools:text="falcon 9 overview" />
+
+        <TextView
+            android:id="@+id/overview_value"
+            style="@style/MainText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="32dp"
+            android:isVisible="@{rocket.description != null}"
+            android:text="@{rocket.description}"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/overview_label"
+            tools:text="Falcon 9 is a two-stage rocket designed and
+manufactured by spasex for the reliable and safe transport of satellites and the dragon
+spacecraft into orbit." />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/main_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="179dp" />
+
+        <TextView
+            android:id="@+id/type_label"
+            style="@style/LabelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:isVisible="@{rocket.type != null}"
+            android:text="@string/details_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/overview_value" />
+
+        <TextView
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isVisible="@{rocket.type != null}"
+            android:text="@{rocket.type}"
+            app:layout_constraintStart_toStartOf="@+id/main_guideline"
+            app:layout_constraintTop_toTopOf="@+id/type_label"
+            tools:text="Rocket" />
+
+        <TextView
+            android:id="@+id/active_label"
+            style="@style/LabelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="4dp"
+            android:isVisible="@{rocket.active != null}"
+            android:text="@string/details_active"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/type_label" />
+
+        <TextView
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isVisible="@{rocket.active != null}"
+            android:text="@{rocket.active ? @string/yes : @string/no}"
+            app:layout_constraintStart_toStartOf="@+id/main_guideline"
+            app:layout_constraintTop_toTopOf="@+id/active_label"
+            tools:text="Yes" />
+
+        <TextView
+            android:id="@+id/company_label"
+            style="@style/LabelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="4dp"
+            android:isVisible="@{rocket.company != null}"
+            android:text="@string/details_company"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/active_label" />
+
+        <TextView
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isVisible="@{rocket.company != null}"
+            android:text="@{rocket.company}"
+            app:layout_constraintStart_toStartOf="@+id/main_guideline"
+            app:layout_constraintTop_toTopOf="@+id/company_label"
+            tools:text="SpaceX" />
+
+        <TextView
+            android:id="@+id/country_label"
+            style="@style/LabelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="4dp"
+            android:isVisible="@{rocket.country != null}"
+            android:text="@string/details_country"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/company_label" />
+
+        <TextView
+            android:id="@+id/country_value"
+            style="@style/MainText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:isVisible="@{rocket.country != null}"
+            android:text="@{rocket.country}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/main_guideline"
+            app:layout_constraintTop_toTopOf="@+id/country_label"
+            tools:text="United States" />
+
+        <TextView
+            android:id="@+id/stages_label"
+            style="@style/LabelText"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:isVisible="@{rocket.stages != null}"
+            android:text="@string/details_stages"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/country_value" />
+
+        <TextView
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isVisible="@{rocket.stages != null}"
+            android:text="@{rocket.stages.toString()}"
+            app:layout_constraintStart_toStartOf="@+id/main_guideline"
+            app:layout_constraintTop_toTopOf="@+id/stages_label"
+            tools:text="2" />
+
+        <TextView
+            android:id="@+id/boosters_label"
+            style="@style/LabelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="4dp"
+            android:isVisible="@{rocket.boosters != null}"
+            android:text="@string/details_boosters"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stages_label" />
+
+        <TextView
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isVisible="@{rocket.boosters != null}"
+            android:text="@{rocket.boosters.toString()}"
+            app:layout_constraintStart_toStartOf="@+id/main_guideline"
+            app:layout_constraintTop_toTopOf="@+id/boosters_label"
+            tools:text="0" />
+
+        <TextView
+            android:id="@+id/height_label"
+            style="@style/LabelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="4dp"
+            android:isVisible="@{rocket.height != null}"
+            android:text="@string/details_height"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/boosters_label" />
+
+        <TextView
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isVisible="@{rocket.height != null}"
+            android:text="@{@string/meters(rocket.height)}"
+            app:layout_constraintStart_toStartOf="@+id/main_guideline"
+            app:layout_constraintTop_toTopOf="@+id/height_label"
+            tools:text="70.0 M" />
+
+        <TextView
+            android:id="@+id/diameter_label"
+            style="@style/LabelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="4dp"
+            android:isVisible="@{rocket.diameter != null}"
+            android:text="@string/details_diameter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/height_label" />
+
+        <TextView
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isVisible="@{rocket.diameter != null}"
+            android:text="@{@string/meters(rocket.diameter)}"
+            app:layout_constraintStart_toStartOf="@+id/main_guideline"
+            app:layout_constraintTop_toTopOf="@+id/diameter_label"
+            tools:text="3.7 M" />
+
+        <TextView
+            android:id="@+id/mass_label"
+            style="@style/LabelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="4dp"
+            android:isVisible="@{rocket.mass != null}"
+            android:text="@string/details_mass"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/diameter_label" />
+
+        <TextView
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isVisible="@{rocket.mass != null}"
+            android:text="@{@string/kilogram(rocket.mass)}"
+            app:layout_constraintStart_toStartOf="@+id/main_guideline"
+            app:layout_constraintTop_toTopOf="@+id/mass_label"
+            tools:text="549054.0 kg" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

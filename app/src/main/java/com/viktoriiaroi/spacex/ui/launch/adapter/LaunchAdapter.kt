@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.viktoriiaroi.core.model.Launch
 
-class LaunchAdapter : RecyclerView.Adapter<LaunchViewHolder>() {
+class LaunchAdapter(private val onItemClick: (launch: Launch) -> Unit) : RecyclerView.Adapter<LaunchViewHolder>() {
     private val launchList = mutableListOf<Launch>()
 
     fun setData(updatedList: List<Launch>) {
@@ -17,7 +17,7 @@ class LaunchAdapter : RecyclerView.Adapter<LaunchViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        LaunchViewHolder.from(parent)
+        LaunchViewHolder.from(parent, onItemClick)
 
     override fun getItemCount() = launchList.size
 

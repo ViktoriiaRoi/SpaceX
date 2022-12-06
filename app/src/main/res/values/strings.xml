@@ -33,4 +33,25 @@
     <string name="card_arrow_description">The arrow to open/close card</string>
     <string name="bookmark_description">Save news to bookmarks</string>
     <string name="image_of_launch">Image of launch</string>
+    <string name="close_description">Close launch details</string>
+
+    <string name="details_core">Core serial</string>
+    <string name="details_block">Block</string>
+    <string name="reused">Reused</string>
+    <string name="details_flight">Flight</string>
+    <string name="details_type">Type</string>
+    <string name="details_active">Active</string>
+    <string name="details_company">Company</string>
+    <string name="details_country">Country</string>
+    <string name="details_stages">Stages</string>
+    <string name="details_boosters">Boosters</string>
+    <string name="details_height">Height</string>
+    <string name="details_diameter">Diameter</string>
+    <string name="details_mass">Mass</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="overview">%s Overview</string>
+    <string name="meters">%s m</string>
+    <string name="kilogram">%s kg</string>
 </resources>

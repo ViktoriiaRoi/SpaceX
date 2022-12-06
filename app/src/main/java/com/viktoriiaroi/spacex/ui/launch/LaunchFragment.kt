@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.viktoriiaroi.spacex.R
@@ -17,10 +18,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class LaunchFragment :
     BaseFragment<FragmentLaunchBinding, LaunchState, LaunchIntent, LaunchViewModel>() {
     override val viewModel: LaunchViewModel by viewModels()
-    private val adapter = LaunchAdapter()
+    private val adapter = LaunchAdapter {
+        val action = LaunchFragmentDirections.actionLaunchFragmentToBottomSheet(it)
+        findNavController().navigate(action)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         setupRecycler(binding.launchesRecycler)
         binding.tryAgainBtn.setOnClickListener {
             updateLaunches(binding.toggleButtonGroup.checkedButtonId)
@@ -34,9 +37,9 @@ class LaunchFragment :
 
     private fun updateLaunches(buttonId: Int) {
         when (buttonId) {
-            R.id.all_btn -> viewModel.handleIntent(LaunchIntent.LoadAllLaunches)
-            R.id.past_btn -> viewModel.handleIntent(LaunchIntent.LoadPastLaunches)
-            R.id.future_btn -> viewModel.handleIntent(LaunchIntent.LoadFutureLaunches)
+            R.id.all_btn -> viewModel.handleIntent(LaunchIntent.LoadLaunches(LaunchType.ALL))
+            R.id.past_btn -> viewModel.handleIntent(LaunchIntent.LoadLaunches(LaunchType.PAST))
+            R.id.future_btn -> viewModel.handleIntent(LaunchIntent.LoadLaunches(LaunchType.FUTURE))
         }
     }
 

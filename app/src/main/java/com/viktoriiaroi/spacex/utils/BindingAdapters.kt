@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import coil.load
 import com.viktoriiaroi.spacex.R
@@ -30,6 +31,12 @@ class BindingAdapters {
                 placeholder(R.drawable.default_launch)
                 error(R.drawable.default_launch)
             }
+        }
+
+        @BindingAdapter("android:isVisible")
+        @JvmStatic
+        fun isVisible(view: View, isVisible: Boolean) {
+            view.isVisible = isVisible
         }
 
         @BindingAdapter("android:joinList")
