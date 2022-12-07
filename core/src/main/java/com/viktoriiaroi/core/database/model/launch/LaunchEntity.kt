@@ -1,4 +1,4 @@
-package com.viktoriiaroi.core.database.model
+package com.viktoriiaroi.core.database.model.launch
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

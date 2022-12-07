@@ -1,7 +1,7 @@
 package com.viktoriiaroi.core.model
 
 import android.os.Parcelable
-import com.viktoriiaroi.core.database.model.LaunchEntity
+import com.viktoriiaroi.core.database.model.launch.LaunchEntity
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

@@ -19,35 +19,45 @@ class LaunchViewModel @Inject constructor(private val launchRepo: LaunchReposito
     init {
         handleIntent(LaunchIntent.LoadLaunches(LaunchType.ALL))
         viewModelScope.launch {
-            updateState()
+            setupAllFlow()
+        }
+        viewModelScope.launch {
+            setupPastFlow()
+        }
+        viewModelScope.launch {
+            setupFutureFlow()
         }
     }
 
-    private suspend fun updateState() {
-        launchRepo.launchFlow.combine(launchType) { launches, type -> Pair(launches, type) }
-            .collect { pair ->
-                var result = pair.first
-                result = when (pair.second) {
-                    LaunchType.ALL -> result.getAllLaunches()
-                    LaunchType.PAST -> result.getPastLaunches()
-                    LaunchType.FUTURE -> result.getFutureLaunches()
+    private suspend fun setupAllFlow() {
+        launchRepo.allLaunchFlow.combine(launchType) { launches, type -> Pair(launches, type) }
+            .collect {
+                if (it.second == LaunchType.ALL) {
+                    postResult(it.first)
                 }
-                mState.postValue(result.reduce())
             }
     }
 
-    private fun Result<List<Launch>>.getAllLaunches() = map { list ->
-        list.sortedBy { launch -> launch.number }
+    private suspend fun setupPastFlow() {
+        launchRepo.pastLaunchFlow.combine(launchType) { launches, type -> Pair(launches, type) }
+            .collect {
+                if (it.second == LaunchType.PAST) {
+                    postResult(it.first)
+                }
+            }
     }
 
-    private fun Result<List<Launch>>.getPastLaunches() = map { list ->
-        list.filter { launch -> !launch.upcoming }
-            .sortedByDescending { launch -> launch.number }
+    private suspend fun setupFutureFlow() {
+        launchRepo.futureLaunchFlow.combine(launchType) { launches, type -> Pair(launches, type) }
+            .collect {
+                if (it.second == LaunchType.FUTURE) {
+                    postResult(it.first)
+                }
+            }
     }
 
-    private fun Result<List<Launch>>.getFutureLaunches() = map { list ->
-        list.filter { launch -> launch.upcoming }
-            .sortedBy { launch -> launch.number }
+    private fun postResult(result: Result<List<Launch>>) {
+        mState.postValue(result.reduce())
     }
 
     override fun handleIntent(intent: LaunchIntent) {
