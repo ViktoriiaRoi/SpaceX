@@ -16,16 +16,22 @@
         android:name="com.viktoriiaroi.spacex.ui.launch.LaunchFragment"
         android:label="Launches"
         tools:layout="@layout/fragment_launch">
-        <action
-            android:id="@+id/action_launchFragment_to_bottomSheet"
-            app:destination="@id/bottomSheet" />
+        <deepLink
+            app:action="android.intent.action.VIEW"
+            app:mimeType="type/subtype"
+            app:uri="app://spacex/launches" />
     </fragment>
 
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.viktoriiaroi.spacex.ui.news.NewsFragment"
         android:label="News"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/fragment_news">
+        <deepLink
+            app:action="android.intent.action.VIEW"
+            app:mimeType="type/subtype"
+            app:uri="app://spacex/news" />
+    </fragment>
 
     <fragment
         android:id="@+id/aboutFragment"

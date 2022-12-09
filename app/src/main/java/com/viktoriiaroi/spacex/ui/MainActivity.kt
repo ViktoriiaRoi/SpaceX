@@ -1,7 +1,9 @@
 package com.viktoriiaroi.spacex.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -11,8 +13,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_SpaceX)
@@ -20,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupNavigation()
+        navController.handleDeepLink(intent)
     }
 
     private fun setupNavigation() {
@@ -30,7 +33,13 @@ class MainActivity : AppCompatActivity() {
             R.id.launchFragment,
             R.id.newsFragment,
             R.id.aboutFragment))
-        binding.bottomNavView.setupWithNavController(navHostFragment.navController)
-        binding.toolbar.setupWithNavController(navHostFragment.navController, appBarConfiguration)
+        navController = navHostFragment.navController
+        binding.bottomNavView.setupWithNavController(navController)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        navController.handleDeepLink(intent)
     }
 }
