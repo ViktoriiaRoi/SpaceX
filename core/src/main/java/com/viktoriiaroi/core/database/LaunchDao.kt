@@ -4,10 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.viktoriiaroi.core.database.model.launch.AllLaunchID
-import com.viktoriiaroi.core.database.model.launch.FutureLaunchID
 import com.viktoriiaroi.core.database.model.launch.LaunchEntity
-import com.viktoriiaroi.core.database.model.launch.PastLaunchID
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -20,15 +17,6 @@ interface LaunchDao {
 
     @Query("SELECT launches.* FROM future_ids JOIN launches ON launches.id = future_ids.id")
     fun getFutureLaunches(): Flow<List<LaunchEntity>>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllIDs(list: List<AllLaunchID>)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPastIDs(list: List<PastLaunchID>)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFutureIDs(list: List<FutureLaunchID>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertLaunches(list: List<LaunchEntity>)

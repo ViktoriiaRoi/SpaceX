@@ -20,6 +20,7 @@ abstract class SpaceDatabase : RoomDatabase() {
     abstract fun getCompanyDao(): CompanyDao
     abstract fun getNewsDao(): NewsDao
     abstract fun getLaunchDao(): LaunchDao
+    abstract fun getLaunchIDsDao(): LaunchIDsDao
     abstract fun getRocketDao(): RocketDao
     abstract fun getCoreDao(): CoreDao
 }
