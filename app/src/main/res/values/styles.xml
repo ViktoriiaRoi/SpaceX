@@ -40,4 +40,8 @@
         <item name="android:backgroundTint">@color/gradient_start</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
+
+    <style name="SearchStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>
