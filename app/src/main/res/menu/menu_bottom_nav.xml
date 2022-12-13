@@ -5,7 +5,7 @@
         android:icon="@drawable/ic_home"
         android:title="@string/home_title" />
     <item
-        android:id="@+id/launchFragment"
+        android:id="@+id/launch_graph"
         android:icon="@drawable/ic_launches"
         android:title="@string/launch_title" />
     <item

@@ -3,6 +3,7 @@
 
     <style name="ToolbarTheme" parent="Theme.SpaceX">
         <item name="android:textColorPrimary">@color/contentLeading</item>
+        <item name="android:textColorSecondary">@color/contentLeading</item>
         <item name="android:fontFamily">@font/goldman_bold</item>
         <item name="textAllCaps">true</item>
     </style>

@@ -1,10 +1,12 @@
 package com.viktoriiaroi.spacex.ui.launch
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
+import android.view.*
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +27,7 @@ class LaunchFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupRecycler(binding.launchesRecycler)
+        setupMenu()
         binding.tryAgainBtn.setOnClickListener {
             updateLaunches(binding.toggleButtonGroup.checkedButtonId)
         }
@@ -33,6 +36,23 @@ class LaunchFragment :
                 updateLaunches(checkedId)
             }
         }
+    }
+
+    private fun setupMenu() {
+        (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.launch_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean =
+                when (menuItem.itemId) {
+                    R.id.search_item -> {
+                        findNavController().navigate(LaunchFragmentDirections.actionLaunchFragmentToSearchFragment())
+                        true
+                    }
+                    else -> false
+                }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun updateLaunches(buttonId: Int) {
