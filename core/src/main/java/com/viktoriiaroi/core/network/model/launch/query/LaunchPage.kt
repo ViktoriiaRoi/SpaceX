@@ -1,4 +1,4 @@
-package com.viktoriiaroi.core.network.model.launch.pagination
+package com.viktoriiaroi.core.network.model.launch.query
 
 import com.google.gson.annotations.SerializedName
 import com.viktoriiaroi.core.network.model.launch.LaunchDTO

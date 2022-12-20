@@ -20,4 +20,7 @@ interface LaunchDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertLaunches(list: List<LaunchEntity>)
+
+    @Query("SELECT * FROM launches WHERE name LIKE :query ORDER BY number")
+    suspend fun searchLaunches(query: String): List<LaunchEntity>
 }

@@ -17,11 +17,11 @@ suspend fun <T, R> processResponse(
     }
 
 private fun <T, R> Response<T>.toResult(mapper: (T) -> R): Result<R> {
-    return if (this.isSuccessful) {
-        this.body()?.let {
+    return if (isSuccessful) {
+        body()?.let {
             Result.success(mapper(it))
         } ?: Result.failure(NetworkException.EmptyData)
     } else {
-        Result.failure(Exception(this.message()))
+        Result.failure(Exception(message()))
     }
 }

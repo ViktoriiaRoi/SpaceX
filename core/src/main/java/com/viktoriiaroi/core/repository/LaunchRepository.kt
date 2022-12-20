@@ -2,6 +2,7 @@ package com.viktoriiaroi.core.repository
 
 import com.viktoriiaroi.core.database.LaunchDao
 import com.viktoriiaroi.core.database.LaunchIDsDao
+import com.viktoriiaroi.core.database.exception.DatabaseException
 import com.viktoriiaroi.core.database.model.launch.AllLaunchID
 import com.viktoriiaroi.core.database.model.launch.FutureLaunchID
 import com.viktoriiaroi.core.database.model.launch.LaunchEntity
@@ -9,8 +10,8 @@ import com.viktoriiaroi.core.database.model.launch.PastLaunchID
 import com.viktoriiaroi.core.model.Launch
 import com.viktoriiaroi.core.network.LaunchService
 import com.viktoriiaroi.core.network.model.launch.LaunchDTO
-import com.viktoriiaroi.core.network.model.launch.pagination.LaunchBody
-import com.viktoriiaroi.core.network.model.launch.pagination.LaunchPage
+import com.viktoriiaroi.core.network.model.launch.query.LaunchBody
+import com.viktoriiaroi.core.network.model.launch.query.LaunchPage
 import com.viktoriiaroi.core.utils.processList
 import com.viktoriiaroi.core.utils.processResponse
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -22,7 +23,8 @@ class LaunchRepository @Inject constructor(
     private val launchDao: LaunchDao,
     private val idDao: LaunchIDsDao,
 ) {
-    private fun mapper(list: List<LaunchEntity>) = list.processList { Launch.fromEntity(it) }
+    private fun mapper(list: List<LaunchEntity>) =
+        list.processList({ Launch.fromEntity(it) }, DatabaseException.Internet)
 
     val allLaunchFlow = launchDao.getAllLaunches().map(::mapper).distinctUntilChanged()
     val pastLaunchFlow = launchDao.getPastLaunches().map(::mapper).distinctUntilChanged()
@@ -98,4 +100,21 @@ class LaunchRepository @Inject constructor(
     private suspend fun clearAndInsertFutureIDs(launchList: List<LaunchDTO>) {
         idDao.clearAndInsertFutureIDs(launchList.map(::futureIDsMapper))
     }
+
+    suspend fun searchLaunches(query: String): Result<List<Launch>> {
+        val networkResult = searchLaunchesFromNetwork(query)
+        val launches = networkResult.getOrNull()
+        if (launches != null && launches.isNotEmpty()) {
+            insertLaunches(launches)
+            return networkResult.map { list -> list.map { Launch.fromDTO(it) } }
+        }
+        return searchLaunchesFromDatabase(query)
+    }
+
+    private suspend fun searchLaunchesFromNetwork(query: String): Result<List<LaunchDTO>> =
+        processResponse({ launchService.getLaunches(LaunchBody.search(".*$query.*")) }, { it.docs })
+
+    private suspend fun searchLaunchesFromDatabase(query: String): Result<List<Launch>> =
+        launchDao.searchLaunches("%$query%")
+            .processList({ Launch.fromEntity(it) }, DatabaseException.SearchResults)
 }

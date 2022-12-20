@@ -26,7 +26,7 @@ class CompanyRepository @Inject constructor(
         )
 
     private suspend fun getCompanyFromDatabase(): Result<Company> =
-        companyDao.getCompany().processSingleValue { Company.fromEntity(it) }
+        companyDao.getCompany().processSingleValue({ Company.fromEntity(it) })
 
     private suspend fun insertCompanyToDatabase(company: Company?) {
         company?.let {
