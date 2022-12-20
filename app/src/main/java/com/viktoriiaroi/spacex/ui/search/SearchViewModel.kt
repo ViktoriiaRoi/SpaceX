@@ -28,11 +28,9 @@ class SearchViewModel @Inject constructor(private val launchRepo: LaunchReposito
     }
 
     private suspend fun searchLaunches(query: String) {
-        if (query != lastQuery) {
-            mState.postValue(SearchState.Loading)
-            lastQuery = query
-            mState.postValue(launchRepo.searchLaunches("%$query%").reduce())
-        }
+        mState.postValue(SearchState.Loading)
+        lastQuery = query
+        mState.postValue(launchRepo.searchLaunches(query).reduce())
     }
 
     private fun handleTyping(isEmpty: Boolean) {

@@ -52,6 +52,7 @@ class LaunchViewModel @Inject constructor(private val launchRepo: LaunchReposito
             when (intent) {
                 is LaunchIntent.ChangeType -> typeFlow.emit(intent.launchType)
                 is LaunchIntent.LoadNextPage -> loadNextPage()
+                is LaunchIntent.LoadAgain -> loadAgain()
             }
         }
     }
@@ -61,6 +62,11 @@ class LaunchViewModel @Inject constructor(private val launchRepo: LaunchReposito
             mState.postValue(LaunchState.LoadingNext)
             loadLaunches(it)
         }
+    }
+
+    private suspend fun loadAgain() {
+        mState.postValue(LaunchState.LoadingFirst)
+        loadLaunches(1)
     }
 
     private suspend fun loadLaunches(page: Int) {

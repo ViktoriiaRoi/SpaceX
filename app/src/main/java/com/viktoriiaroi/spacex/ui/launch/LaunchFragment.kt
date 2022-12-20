@@ -15,7 +15,9 @@ import com.viktoriiaroi.spacex.databinding.FragmentLaunchBinding
 import com.viktoriiaroi.spacex.ui.common.BaseFragment
 import com.viktoriiaroi.spacex.ui.launch.adapter.LaunchAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class LaunchFragment :
     BaseFragment<FragmentLaunchBinding, LaunchState, LaunchIntent, LaunchViewModel>() {
@@ -29,7 +31,7 @@ class LaunchFragment :
         setupRecycler(binding.launchesRecycler)
         setupMenu()
         binding.tryAgainBtn.setOnClickListener {
-            changeLaunchType(binding.toggleButtonGroup.checkedButtonId)
+            viewModel.handleIntent(LaunchIntent.LoadAgain)
         }
         binding.toggleButtonGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
