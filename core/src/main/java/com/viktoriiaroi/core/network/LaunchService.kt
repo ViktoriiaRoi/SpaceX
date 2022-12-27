@@ -1,7 +1,7 @@
 package com.viktoriiaroi.core.network
 
-import com.viktoriiaroi.core.network.model.launch.pagination.LaunchPage
-import com.viktoriiaroi.core.network.model.launch.pagination.LaunchBody
+import com.viktoriiaroi.core.network.model.launch.query.LaunchPage
+import com.viktoriiaroi.core.network.model.launch.query.LaunchBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST

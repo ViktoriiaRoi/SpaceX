@@ -25,7 +25,7 @@ class RocketRepository @Inject constructor(
         )
 
     private suspend fun getRocketFromDatabase(id: String): Result<Rocket> =
-        rocketDao.getRocket(id).processSingleValue { Rocket.fromEntity(it) }
+        rocketDao.getRocket(id).processSingleValue({ Rocket.fromEntity(it) })
 
     private suspend fun insertRocketToDatabase(rocket: Rocket?) {
         rocket?.let {

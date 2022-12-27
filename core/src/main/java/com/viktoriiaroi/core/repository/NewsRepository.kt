@@ -34,7 +34,7 @@ class NewsRepository @Inject constructor(
         processResponse({ newsService.getNews() }, { it })
 
     private suspend fun getNewsFromDatabase(): Result<List<News>> =
-        newsDao.getNews().processList { News.fromEntity(it) }
+        newsDao.getNews().processList({ News.fromEntity(it) })
 
     private suspend fun insertNewsToDatabase(newsList: List<NewsDTO>) {
         newsDao.insertNews(newsList.map { NewsEntity.fromDTO(it) })

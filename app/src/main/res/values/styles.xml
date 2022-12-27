@@ -3,6 +3,7 @@
 
     <style name="ToolbarTheme" parent="Theme.SpaceX">
         <item name="android:textColorPrimary">@color/contentLeading</item>
+        <item name="android:textColorSecondary">@color/contentLeading</item>
         <item name="android:fontFamily">@font/goldman_bold</item>
         <item name="textAllCaps">true</item>
     </style>
@@ -39,5 +40,9 @@
     <style name="TryAgainButton" parent="Theme.SpaceX">
         <item name="android:backgroundTint">@color/gradient_start</item>
         <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="SearchStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>

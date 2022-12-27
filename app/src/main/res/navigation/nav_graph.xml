@@ -8,24 +8,15 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.viktoriiaroi.spacex.ui.home.HomeFragment"
-        android:label="Home"
+        android:label="@string/home_title"
         tools:layout="@layout/fragment_home" />
 
-    <fragment
-        android:id="@+id/launchFragment"
-        android:name="com.viktoriiaroi.spacex.ui.launch.LaunchFragment"
-        android:label="Launches"
-        tools:layout="@layout/fragment_launch">
-        <deepLink
-            app:action="android.intent.action.VIEW"
-            app:mimeType="type/subtype"
-            app:uri="app://spacex/launches" />
-    </fragment>
+    <include app:graph="@navigation/launch_graph" />
 
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.viktoriiaroi.spacex.ui.news.NewsFragment"
-        android:label="News"
+        android:label="@string/news_title"
         tools:layout="@layout/fragment_news">
         <deepLink
             app:action="android.intent.action.VIEW"
@@ -36,15 +27,6 @@
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.viktoriiaroi.spacex.ui.about.AboutFragment"
-        android:label="About"
+        android:label="@string/about_title"
         tools:layout="@layout/fragment_about" />
-
-    <dialog
-        android:id="@+id/bottomSheet"
-        android:name="com.viktoriiaroi.spacex.ui.details.DetailsFragment"
-        tools:layout="@layout/fragment_details" >
-        <argument
-            android:name="launch"
-            app:argType="com.viktoriiaroi.core.model.Launch" />
-    </dialog>
 </navigation>

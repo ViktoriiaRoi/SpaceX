@@ -25,7 +25,7 @@ class CoreRepository @Inject constructor(
         )
 
     private suspend fun getCoreFromDatabase(id: String): Result<Core> =
-        coreDao.getCore(id).processSingleValue { Core.fromEntity(it) }
+        coreDao.getCore(id).processSingleValue({ Core.fromEntity(it) })
 
     private suspend fun insertCoreToDatabase(core: Core?) {
         core?.let {

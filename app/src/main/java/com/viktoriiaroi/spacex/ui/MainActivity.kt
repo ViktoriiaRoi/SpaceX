@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.viktoriiaroi.spacex.R
 import com.viktoriiaroi.spacex.databinding.ActivityMainBinding
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
         setupNavigation()
         navController.handleDeepLink(intent)
     }
@@ -35,7 +37,11 @@ class MainActivity : AppCompatActivity() {
             R.id.aboutFragment))
         navController = navHostFragment.navController
         binding.bottomNavView.setupWithNavController(navController)
-        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     override fun onNewIntent(intent: Intent?) {

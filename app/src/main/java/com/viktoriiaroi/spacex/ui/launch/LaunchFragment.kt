@@ -1,10 +1,12 @@
 package com.viktoriiaroi.spacex.ui.launch
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
+import android.view.*
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +15,9 @@ import com.viktoriiaroi.spacex.databinding.FragmentLaunchBinding
 import com.viktoriiaroi.spacex.ui.common.BaseFragment
 import com.viktoriiaroi.spacex.ui.launch.adapter.LaunchAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class LaunchFragment :
     BaseFragment<FragmentLaunchBinding, LaunchState, LaunchIntent, LaunchViewModel>() {
@@ -25,14 +29,32 @@ class LaunchFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupRecycler(binding.launchesRecycler)
+        setupMenu()
         binding.tryAgainBtn.setOnClickListener {
-            changeLaunchType(binding.toggleButtonGroup.checkedButtonId)
+            viewModel.handleIntent(LaunchIntent.LoadAgain)
         }
         binding.toggleButtonGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
                 changeLaunchType(checkedId)
             }
         }
+    }
+
+    private fun setupMenu() {
+        (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.launch_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean =
+                when (menuItem.itemId) {
+                    R.id.search_item -> {
+                        findNavController().navigate(LaunchFragmentDirections.actionLaunchFragmentToSearchFragment())
+                        true
+                    }
+                    else -> false
+                }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun changeLaunchType(buttonId: Int) {
