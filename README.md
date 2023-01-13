@@ -1,5 +1,5 @@
 # SpaceX
-The app shows information about SpaceX company, its rocket launches, news, etc.
+The app shows information about SpaceX company, its rocket launches, news, etc. Uses open-source API: https://github.com/r-spacex/SpaceX-API
 
 ## Features
 * Information about the company in expandable cards
