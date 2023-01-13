@@ -3,7 +3,6 @@ package com.viktoriiaroi.spacex.ui.launch
 import androidx.lifecycle.viewModelScope
 import com.viktoriiaroi.core.repository.LaunchRepository
 import com.viktoriiaroi.spacex.ui.common.BaseViewModel
-import com.viktoriiaroi.spacex.ui.launch.LaunchReducers.Companion.reduce
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

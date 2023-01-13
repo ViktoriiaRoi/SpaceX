@@ -3,7 +3,6 @@ package com.viktoriiaroi.spacex.ui.search
 import androidx.lifecycle.viewModelScope
 import com.viktoriiaroi.core.repository.LaunchRepository
 import com.viktoriiaroi.spacex.ui.common.BaseViewModel
-import com.viktoriiaroi.spacex.ui.search.SearchReducers.Companion.reduce
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

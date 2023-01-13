@@ -3,13 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
-
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.viktoriiaroi.spacex.ui.home.HomeFragment"
-        android:label="@string/home_title"
-        tools:layout="@layout/fragment_home" />
+    app:startDestination="@id/launch_graph">
 
     <include app:graph="@navigation/launch_graph" />
 

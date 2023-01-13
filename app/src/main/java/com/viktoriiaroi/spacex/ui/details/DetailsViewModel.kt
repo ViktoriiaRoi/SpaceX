@@ -5,7 +5,6 @@ import com.viktoriiaroi.core.repository.CoreRepository
 import com.viktoriiaroi.core.repository.RocketRepository
 import com.viktoriiaroi.spacex.ui.common.BaseViewModel
 import com.viktoriiaroi.spacex.ui.common.exception.AppException
-import com.viktoriiaroi.spacex.ui.details.DetailsReducers.Companion.reduce
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

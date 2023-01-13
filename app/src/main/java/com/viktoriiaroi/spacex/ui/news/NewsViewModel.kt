@@ -3,7 +3,6 @@ package com.viktoriiaroi.spacex.ui.news
 import androidx.lifecycle.viewModelScope
 import com.viktoriiaroi.core.repository.NewsRepository
 import com.viktoriiaroi.spacex.ui.common.BaseViewModel
-import com.viktoriiaroi.spacex.ui.news.NewsReducers.Companion.reduce
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
