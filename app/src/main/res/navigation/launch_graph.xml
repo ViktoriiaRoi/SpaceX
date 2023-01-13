@@ -1,0 +1,43 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/launch_graph"
+    app:startDestination="@id/launchFragment">
+
+    <fragment
+        android:id="@+id/launchFragment"
+        android:name="com.viktoriiaroi.spacex.ui.launch.LaunchFragment"
+        android:label="@string/launch_title"
+        tools:layout="@layout/fragment_launch">
+        <deepLink
+            app:action="android.intent.action.VIEW"
+            app:mimeType="type/subtype"
+            app:uri="app://spacex/launches" />
+        <action
+            android:id="@+id/action_launchFragment_to_bottomSheet"
+            app:destination="@id/bottomSheet" />
+        <action
+            android:id="@+id/action_launchFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.viktoriiaroi.spacex.ui.search.SearchFragment"
+        android:label="@string/search_title"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_bottomSheet"
+            app:destination="@id/bottomSheet" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/bottomSheet"
+        android:name="com.viktoriiaroi.spacex.ui.details.DetailsFragment"
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="launch"
+            app:argType="com.viktoriiaroi.core.model.Launch" />
+    </dialog>
+
+</navigation>

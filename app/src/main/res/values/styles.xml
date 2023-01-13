@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ToolbarTheme" parent="Theme.SpaceX">
+        <item name="android:textColorPrimary">@color/contentLeading</item>
+        <item name="android:textColorSecondary">@color/contentLeading</item>
+        <item name="android:fontFamily">@font/goldman_bold</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="ToggleButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/contentSupporting</item>
+        <item name="android:backgroundTint">@color/toggle_btn</item>
+        <item name="android:textSize">@dimen/normal_text_size</item>
+    </style>
+
+    <style name="ImageCard" parent="Theme.SpaceX">
+        <item name="cardBackgroundColor">@android:color/transparent</item>
+        <item name="cardCornerRadius">@dimen/card_radius</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <style name="ClockCard" parent="Theme.SpaceX">
+        <item name="cardBackgroundColor">@color/background</item>
+        <item name="cornerRadius">2dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <style name="DetailsBottomSheet" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/DetailsStyle</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:navigationBarColor">@color/background</item>
+    </style>
+
+    <style name="DetailsStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_bg</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="TryAgainButton" parent="Theme.SpaceX">
+        <item name="android:backgroundTint">@color/gradient_start</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="SearchStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textSize">16sp</item>
+    </style>
+</resources>

@@ -1,0 +1,21 @@
+<shortcuts
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="NewsFragment"
+        android:enabled="true"
+        android:shortcutShortLabel="@string/news_title"
+        android:icon="@drawable/ic_news">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="app://spacex/news" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="LaunchFragment"
+        android:enabled="true"
+        android:shortcutShortLabel="@string/launch_title"
+        android:icon="@drawable/ic_launches">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="app://spacex/launches" />
+    </shortcut>
+</shortcuts>
