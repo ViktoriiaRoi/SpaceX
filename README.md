@@ -15,7 +15,8 @@ Application consist of 2 modules:
 * `app` - UI layer, designed as MVI architecture pattern
 * `core` - data layer, designed as Repository pattern
 
-![image](https://user-images.githubusercontent.com/44781809/212364769-91a27bda-d23b-48b7-aeae-f55f7ef9a201.png)
+
+![image](https://user-images.githubusercontent.com/44781809/212377110-c18531bc-b31a-4cc7-a144-1c30d1616a8d.png)
 
 ### Techonologies
 * Dagger Hilt
